@@ -1,1 +1,1 @@
-# ai-image-generation
+# ai-image-generation-app
