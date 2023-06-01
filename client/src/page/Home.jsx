@@ -1,4 +1,5 @@
 import React from 'react';
+import { PageHOC } from '../components';
 
 const Home = () => {
   return (
