@@ -2,11 +2,14 @@ import React, { createContext, useContext, useEffect, useRef, useState } from 'r
 import { ethers } from 'ethers';
 import Web3Modal from 'web3modal';
 import { useNavigate } from 'react-router-dom';
+import { ABI, ADDRESS } from '../contract';
 
 const GlobalContext = createContext();
 
 export const GlobalContextProvider = ({children}) => {
     const [walletAddress, setWalletAddress] = useState('');
+    const [contract, setContract] = useState(null);
+    const [provider, setProvider] = useState(null);
 
     //* Set the wallet address to the state
     const updateCurrentWalletAddress = async () => {
