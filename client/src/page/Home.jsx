@@ -13,17 +13,23 @@ const Home = () => {
       const playerExists = await contract.isPlayer(walletAddress);
 
       if(!playerExists) {
-        await contract.registerPlayer(playerName, playerName, { gasLimit: 500000 });
+        // await contract.registerPlayer(playerName, playerName, { gasLimit: 500000 });
+        await contract.registerPlayer(playerName, playerName);
 
         setShowAlert({
-          status: 'true',
+          status: true,
           type: 'info',
           message: `${playerName} is being summoned`
         })
       }
     } catch (error) {
-      alert(error);
-      console.log(error);
+      setShowAlert({
+        status: true,
+        type: 'failure',
+        message: error.message
+      })
+      // alert(error);
+      // console.log(error);
     }
   }
 

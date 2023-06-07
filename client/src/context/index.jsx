@@ -9,9 +9,9 @@ const GlobalContext = createContext();
 export const GlobalContextProvider = ({children}) => {
     const [walletAddress, setWalletAddress] = useState('');
     const [contract, setContract] = useState(null);
-    const [connection, setConnection] = useState(null);
+    // const [connection, setConnection] = useState(null);
     // const [web3Modal, setWeb3Modal] = useState(null);
-    // const [provider, setProvider] = useState(null);
+    const [provider, setProvider] = useState(null);
     const [showAlert, setShowAlert] = useState({ status: false, type: 'info', message: '' });
 
     //* Set the wallet address to the state
