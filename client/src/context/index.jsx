@@ -9,37 +9,48 @@ const GlobalContext = createContext();
 export const GlobalContextProvider = ({children}) => {
     const [walletAddress, setWalletAddress] = useState('');
     const [contract, setContract] = useState(null);
-    const [provider, setProvider] = useState(null);
+    const [connection, setConnection] = useState(null);
+    // const [web3Modal, setWeb3Modal] = useState(null);
+    // const [provider, setProvider] = useState(null);
     const [showAlert, setShowAlert] = useState({ status: false, type: 'info', message: '' });
 
     //* Set the wallet address to the state
     const updateCurrentWalletAddress = async () => {
-        const accounts = await window?.ethereum?.request({ method: 'eth_requestAccounts' });
-    
-        if (accounts) setWalletAddress(accounts[0]);
-      };
-    
+      const accounts = await window?.ethereum?.request({ method: 'eth_accounts' });
+
+      if (accounts) setWalletAddress(accounts[0]);
+    };
+
     useEffect(() => {
-        updateCurrentWalletAddress();
-    
-        window?.ethereum?.on('accountsChanged', updateCurrentWalletAddress);
+      updateCurrentWalletAddress();
+
+      window?.ethereum?.on('accountsChanged', updateCurrentWalletAddress);
     }, []);
 
     //* Set the smart contract and provider to the state
     useEffect(() => {
-        const setSmartContractAndProvider = async () => {
-            const web3Modal = new Web3Modal();
-            const connection = await web3Modal.connect();
-            const newProvider = new ethers.providers.Web3Provider(connection);
-            const signer = newProvider.getSigner();
-            const newContract = new ethers.Contract(ADDRESS, ABI, signer);
+      const setSmartContractAndProvider = async () => {
+        const web3Modal = new Web3Modal();
+        const connection = await web3Modal.connect();
+        // console.log("connection", connection); 
+        const newProvider = new ethers.providers.Web3Provider(connection);
+        const signer = newProvider.getSigner();
+        const newContract = new ethers.Contract(ADDRESS, ABI, signer);
 
-            setProvider(newProvider);
-            setContract(newContract);
-        };
+        setProvider(newProvider);
+        setContract(newContract);
+        setConnection(connection);
+        setWeb3Modal(web3Modal);
+      };
 
-        setSmartContractAndProvider();
+      setSmartContractAndProvider();
     }, []);
+
+  //     if (contract) {
+  //       console.log("contract", contract)
+  //   console.log("connection", connection)
+  //   console.log("web3modal", web3Modal)// Render a loading state while the contract is null
+  // }
 
 
     //* Handle alerts

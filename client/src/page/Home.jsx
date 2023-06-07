@@ -8,10 +8,12 @@ const Home = () => {
 
   const handleClick = async ()=> {
     try {
+      console.log({contract})
+      // console.log(walletAddress)
       const playerExists = await contract.isPlayer(walletAddress);
 
       if(!playerExists) {
-        await contract.registerPlayer(playerName)
+        await contract.registerPlayer(playerName, playerName, { gasLimit: 500000 });
 
         setShowAlert({
           status: 'true',
@@ -21,6 +23,7 @@ const Home = () => {
       }
     } catch (error) {
       alert(error);
+      console.log(error);
     }
   }
 
