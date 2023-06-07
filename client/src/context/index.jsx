@@ -10,6 +10,7 @@ export const GlobalContextProvider = ({children}) => {
     const [walletAddress, setWalletAddress] = useState('');
     const [contract, setContract] = useState(null);
     const [provider, setProvider] = useState(null);
+    const [showAlert, setShowAlert] = useState({ status: false, type: 'info', message: '' });
 
     //* Set the wallet address to the state
     const updateCurrentWalletAddress = async () => {
@@ -40,11 +41,25 @@ export const GlobalContextProvider = ({children}) => {
         setSmartContractAndProvider();
     }, []);
 
+
+    //* Handle alerts
+    useEffect(() => {
+      if (showAlert?.status) {
+        const timer = setTimeout(() => {
+          setShowAlert({ status: false, type: 'info', message: '' });
+        }, [5000]);
+
+        return () => clearTimeout(timer);
+      }
+    }, [showAlert]);
+
     return (
         <GlobalContext.Provider
           value={{
             contract,
-            walletAddress
+            walletAddress,
+            showAlert, 
+            setShowAlert
           }}
         >
           {children}
