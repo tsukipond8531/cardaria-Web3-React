@@ -1,1 +1,1 @@
-# ai-image-generation
+# fp-progjar
