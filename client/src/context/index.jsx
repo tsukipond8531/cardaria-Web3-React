@@ -10,8 +10,6 @@ const GlobalContext = createContext();
 export const GlobalContextProvider = ({children}) => {
     const [walletAddress, setWalletAddress] = useState('');
     const [contract, setContract] = useState(null);
-    // const [connection, setConnection] = useState(null);
-    // const [web3Modal, setWeb3Modal] = useState(null);
     const [provider, setProvider] = useState(null);
     const [showAlert, setShowAlert] = useState({ status: false, type: 'info', message: '' });
 
@@ -36,7 +34,6 @@ export const GlobalContextProvider = ({children}) => {
       const setSmartContractAndProvider = async () => {
         const web3Modal = new Web3Modal();
         const connection = await web3Modal.connect();
-        // console.log("connection", connection); 
         const newProvider = new ethers.providers.Web3Provider(connection);
         const signer = newProvider.getSigner();
         const newContract = new ethers.Contract(ADDRESS, ABI, signer);
@@ -49,12 +46,6 @@ export const GlobalContextProvider = ({children}) => {
 
       setSmartContractAndProvider();
     }, []);
-
-  //     if (contract) {
-  //       console.log("contract", contract)
-  //   console.log("connection", connection)
-  //   console.log("web3modal", web3Modal)// Render a loading state while the contract is null
-  // }
 
     //* Activate event listeners for the smart contract
     useEffect(() => {
