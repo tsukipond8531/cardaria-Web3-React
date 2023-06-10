@@ -10,8 +10,7 @@ const Home = () => {
 
   const handleClick = async ()=> {
     try {
-      console.log({contract})
-      // console.log(walletAddress)
+      // console.log({contract})
       const playerExists = await contract.isPlayer(walletAddress);
 
       if(!playerExists) {
@@ -40,7 +39,7 @@ const Home = () => {
       const playerExists = await contract.isPlayer(walletAddress);
       const playerTokenExists = await contract.isPlayerToken(walletAddress);
 
-      console.log({playerExists, playerTokenExists })
+      // console.log({playerExists, playerTokenExists })
 
       if (playerExists && playerTokenExists) navigate('/create-battle');
     };
