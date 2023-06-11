@@ -3,6 +3,7 @@ import { ethers } from 'ethers';
 import Web3Modal from 'web3modal';
 import { useNavigate } from 'react-router-dom';
 import { ABI, ADDRESS } from '../contract';
+import { createEventListeners } from './createEventListeners';
 
 const GlobalContext = createContext();
 
@@ -13,6 +14,9 @@ export const GlobalContextProvider = ({children}) => {
     // const [web3Modal, setWeb3Modal] = useState(null);
     const [provider, setProvider] = useState(null);
     const [showAlert, setShowAlert] = useState({ status: false, type: 'info', message: '' });
+
+
+    const navigate = useNavigate();
 
     //* Set the wallet address to the state
     const updateCurrentWalletAddress = async () => {
@@ -52,6 +56,21 @@ export const GlobalContextProvider = ({children}) => {
   //   console.log("web3modal", web3Modal)// Render a loading state while the contract is null
   // }
 
+    //* Activate event listeners for the smart contract
+    useEffect(() => {
+      if (contract) {
+        createEventListeners({
+          navigate,
+          contract,
+          provider,
+          walletAddress,
+          setShowAlert,
+          // player1Ref,
+          // player2Ref,
+          // setUpdateGameData,
+        });
+      }
+    }, []);
 
     //* Handle alerts
     useEffect(() => {
