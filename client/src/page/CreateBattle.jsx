@@ -1,11 +1,40 @@
 import React from 'react';
-import { PageHOC } from '../components';
+import { CustomButton, CustomInput, PageHOC } from '../components';
+import { useNavigate } from 'react-router-dom';
+import styles from '../styles';
+import { useGlobalContext } from '../context';
+
 
 const CreateBattle = () => {
+  const { contract, battleName, setBattleName, } = useGlobalContext();
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+
+  };
+
   return (
-    <div>
-      
-    </div>
+<>
+      {/* {waitBattle && <GameLoad />} */}
+
+      <div className="flex flex-col mb-5">
+        <CustomInput
+          label="Battle"
+          placeHolder="Enter battle name"
+          value={battleName}
+          handleValueChange={setBattleName}
+        />
+
+        <CustomButton
+          title="Create Battle"
+          handleClick={handleClick}
+          restStyles="mt-6"
+        />
+      </div>
+      <p className={styles.infoText} onClick={() => navigate('/join-battle')}>
+        Or join already existing battles
+      </p>
+    </>
   )
 };
 
