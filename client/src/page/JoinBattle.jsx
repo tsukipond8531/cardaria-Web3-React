@@ -9,6 +9,20 @@ const JoinBattle = () => {
     const { contract, gameData, setShowAlert, setBattleName, walletAddress } = useGlobalContext();
     const navigate = useNavigate();
 
+
+    const handleClick = async (battleName) => {
+        setBattleName(battleName);
+    
+        try {
+          await contract.joinBattle(battleName);
+    
+          setShowAlert({ status: true, type: 'success', message: `Joining ${battleName}` });
+        } catch (error) {
+            console.log(error);
+        //   setErrorMessage(error);
+        }
+      };
+      
   return (
     <>
         <h2 className={styles.joinHeadText}>Available Battles:</h2>
