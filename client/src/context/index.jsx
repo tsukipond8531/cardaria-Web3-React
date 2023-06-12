@@ -15,7 +15,7 @@ export const GlobalContextProvider = ({children}) => {
     const [battleName, setBattleName] = useState('');
     const [gameData, setGameData] = useState({ players: [], pendingBattles: [], activeBattle: null });
     const [updateGameData, setUpdateGameData] = useState(0);
-    const [battleGround, setBattleGround] = useState('bg-astral');
+    const [battleGround, setBattleGround] = useState('bg-panight');
 
     const navigate = useNavigate();
 
