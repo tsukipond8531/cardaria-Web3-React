@@ -15,6 +15,7 @@ export const GlobalContextProvider = ({children}) => {
     const [battleName, setBattleName] = useState('');
     const [gameData, setGameData] = useState({ players: [], pendingBattles: [], activeBattle: null });
     const [updateGameData, setUpdateGameData] = useState(0);
+    const [battleGround, setBattleGround] = useState('bg-astral');
 
     const navigate = useNavigate();
 
@@ -46,7 +47,10 @@ export const GlobalContextProvider = ({children}) => {
         setWeb3Modal(web3Modal);
       };
 
-      setSmartContractAndProvider();
+      // setSmartContractAndProvider();
+      const timer = setTimeout(() => setSmartContractAndProvider(), [1000]);
+
+      return () => clearTimeout(timer);
     }, []);
 
     //* Activate event listeners for the smart contract
@@ -124,7 +128,9 @@ export const GlobalContextProvider = ({children}) => {
             setShowAlert,
             battleName,
             setBattleName,
-            gameData
+            gameData,
+            battleGround,
+            setBattleGround
           }}
         >
           {children}
