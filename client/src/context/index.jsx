@@ -14,6 +14,7 @@ export const GlobalContextProvider = ({children}) => {
     const [showAlert, setShowAlert] = useState({ status: false, type: 'info', message: '' });
     const [battleName, setBattleName] = useState('');
     const [gameData, setGameData] = useState({ players: [], pendingBattles: [], activeBattle: null });
+    const [updateGameData, setUpdateGameData] = useState(0);
 
     const navigate = useNavigate();
 
@@ -57,6 +58,7 @@ export const GlobalContextProvider = ({children}) => {
           provider,
           walletAddress,
           setShowAlert,
+          setUpdateGameData
           // player1Ref,
           // player2Ref,
           // setUpdateGameData,
@@ -100,7 +102,7 @@ export const GlobalContextProvider = ({children}) => {
       };
 
       // fetchGameData();
-    }, [contract])
+    }, [contract, updateGameData])
 
     //* Handle alerts
     useEffect(() => {
