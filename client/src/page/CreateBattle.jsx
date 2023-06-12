@@ -6,7 +6,7 @@ import { useGlobalContext } from '../context';
 
 
 const CreateBattle = () => {
-  const { contract, battleName, setBattleName, gameData } = useGlobalContext();
+  const { contract, battleName, setBattleName, gameData, setShowAlert } = useGlobalContext();
   const [waitBattle, setWaitBattle] = useState(false);
   const navigate = useNavigate();
 
@@ -19,15 +19,17 @@ const CreateBattle = () => {
     }
   }, [gameData]);
 
-  // console.log(gameData)
+  console.log(gameData)
 
   const handleClick = async () => {
     if (battleName === '' || battleName.trim() === '') return null;
     try {
-      await contract.createBattle(battleName);
-
+      await contract.createBattle(battleName, { gasLimit: 50000 });
+      setShowAlert({ status: true, type: 'success', message: `Creating ${battleName}` });
       setWaitBattle(true);
     } catch (error) {
+      setShowAlert({ status: true, type: 'failure', message: `${error}` });
+      console.log(error)
       // setErrorMessage(error);
     }
   };
