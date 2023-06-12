@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import styles from '../styles';
-import { Alert } from '../components';
+import { ActionButton, Alert, Card, GameInfo, PlayerInfo } from '../components';
 import { useGlobalContext } from '../context';
 import { attack, attackSound, defense, defenseSound, player01 as player01Icon, player02 as player02Icon } from '../assets';
 import { playAudio } from '../utils/animation.js';
@@ -58,7 +58,21 @@ const Battle = () => {
     <div className={`${styles.flexBetween} ${styles.gameContainer} ${battleGround}`}>
         {showAlert?.status && <Alert type={showAlert.type} message={showAlert.message} />}
 
-        <h1 className='text-xl text-black'>{battleName}</h1>
+        <PlayerInfo/>
+        <div className={`${styles.flexCenter} flex-col my-10`}>
+        <Card/>
+
+        <div className="flex items-center flex-row">
+          <ActionButton/>
+
+          <Card/>
+
+          <ActionButton/>
+        </div>
+      </div>
+        <PlayerInfo/>
+
+        <GameInfo />
     </div>
   )
 }
