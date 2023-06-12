@@ -1,5 +1,5 @@
-import React from 'react';
-import { CustomButton, CustomInput, PageHOC } from '../components';
+import React, { useState } from 'react';
+import { CustomButton, CustomInput, GameLoad, PageHOC } from '../components';
 import { useNavigate } from 'react-router-dom';
 import styles from '../styles';
 import { useGlobalContext } from '../context';
@@ -7,15 +7,24 @@ import { useGlobalContext } from '../context';
 
 const CreateBattle = () => {
   const { contract, battleName, setBattleName, } = useGlobalContext();
+  const [waitBattle, setWaitBattle] = useState(false);
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleClick = async () => {
+    if (battleName === '' || battleName.trim() === '') return null;
 
+    try {
+      await contract.createBattle(battleName);
+
+      setWaitBattle(true);
+    } catch (error) {
+      // setErrorMessage(error);
+    }
   };
 
   return (
 <>
-      {/* {waitBattle && <GameLoad />} */}
+      {waitBattle && <GameLoad/>}
 
       <div className="flex flex-col mb-5">
         <CustomInput
