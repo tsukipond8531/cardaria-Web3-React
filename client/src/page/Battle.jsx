@@ -71,7 +71,12 @@ const Battle = () => {
             {/* <Card/> */}
 
             <div className="flex items-center flex-row">
-            <ActionButton/>
+            {/* <ActionButton/> */}
+            <ActionButton
+                imgUrl={attack}
+                handleClick={() => makeAMove(1)}
+                restStyles="mr-2 hover:border-yellow-400"
+            />
 
             <Card
                 card={player1}
@@ -81,7 +86,12 @@ const Battle = () => {
             />
             {/* <Card/> */}
 
-            <ActionButton/>
+            {/* <ActionButton/> */}
+            <ActionButton
+                imgUrl={defense}
+                handleClick={() => makeAMove(2)}
+                restStyles="ml-6 hover:border-red-600"
+            />
             </div>
         </div>
         <PlayerInfo player={player1} playerIcon={player01Icon} />
