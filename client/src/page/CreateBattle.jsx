@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CustomButton, CustomInput, GameLoad, PageHOC } from '../components';
 import { useNavigate } from 'react-router-dom';
 import styles from '../styles';
@@ -6,13 +6,23 @@ import { useGlobalContext } from '../context';
 
 
 const CreateBattle = () => {
-  const { contract, battleName, setBattleName, } = useGlobalContext();
+  const { contract, battleName, setBattleName, gameData } = useGlobalContext();
   const [waitBattle, setWaitBattle] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (gameData?.activeBattle?.battleStatus === 0) {
+      setWaitBattle(true);
+    //   navigate(`/battle/${gameData.activeBattle.name}`);
+    // } else if (gameData?.activeBattle?.battleStatus === 0) {
+    //   setWaitBattle(true);
+    }
+  }, [gameData]);
+
+  // console.log(gameData)
+
   const handleClick = async () => {
     if (battleName === '' || battleName.trim() === '') return null;
-
     try {
       await contract.createBattle(battleName);
 
