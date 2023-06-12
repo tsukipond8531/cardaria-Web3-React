@@ -57,20 +57,21 @@ const Battle = () => {
   return (
     <div className={`${styles.flexBetween} ${styles.gameContainer} ${battleGround}`}>
         {showAlert?.status && <Alert type={showAlert.type} message={showAlert.message} />}
+  
+        <PlayerInfo player={player2} playerIcon={player02Icon} mt />
 
-        <PlayerInfo/>
-        <div className={`${styles.flexCenter} flex-col my-10`}>
-        <Card/>
+            <div className={`${styles.flexCenter} flex-col my-10`}>
+            <Card/>
 
-        <div className="flex items-center flex-row">
-          <ActionButton/>
+            <div className="flex items-center flex-row">
+            <ActionButton/>
 
-          <Card/>
+            <Card/>
 
-          <ActionButton/>
+            <ActionButton/>
+            </div>
         </div>
-      </div>
-        <PlayerInfo/>
+        <PlayerInfo player={player1} playerIcon={player01Icon} />
 
         <GameInfo />
     </div>
