@@ -5,7 +5,7 @@ import Alert from "./Alert";
 import GameLoad from "./GameLoad";
 import ActionButton from "./ActionButton";
 import Card from "./Card";
-import GameInfo from "./Alert";
+import GameInfo from "./GameInfo";
 import PlayerInfo from "./PlayerInfo";
 
 export {
