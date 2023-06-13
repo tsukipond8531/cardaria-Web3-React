@@ -104,8 +104,8 @@ export  function ChatRoom() {
             {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg} />)}
             <span ref={dummy}></span>
         </main>
-        <div className="relative">
-            <form onSubmit={sendMessage} className="chat-form flex w-[432px] fixed rounded-b-md">
+        <div className="relative w-full">
+            <form onSubmit={sendMessage} className="chat-form flex w-full fixed rounded-b-md">
                 <input className='w-[384px] lg:[256px] text-blue-500 pl-2 rounded-bl-md  placeholder:text-xl'  value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="do not trash talk..." />
                 <button className="rounded-b-md bg-blue-500" type="submit" disabled={!formValue}>🕊️</button>
             </form>
