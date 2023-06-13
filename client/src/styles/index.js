@@ -10,7 +10,7 @@ const styles = {
 
   // hoc page
   hocContainer: 'min-h-screen flex xl:flex-row flex-col relative',
-  hocContentBox: 'flex flex-1 justify-between bg-siteblack py-8 sm:px-12 px-8 flex-col',
+  hocContentBox: 'flex flex-1 justify-between bg-rose-800 py-8 sm:px-12 px-8 flex-col',
   hocLogo: 'w-[160px] h-[52px] object-contain cursor-pointer',
   hocBodyWrapper: 'flex-1 flex justify-center flex-col xl:mt-0 my-16',
 
@@ -43,9 +43,9 @@ const styles = {
   // card component
   cardContainer: 'relative sm:w-[260px] w-[220px] sm:h-[335px] h-[280px] z-0 transition-all',
   cardImg: 'w-full h-full object-contain',
-  cardPointContainer: 'absolute sm:w-[40px] w-[32px] sm:h-[40px] h-[32px] rounded-[25px] bottom-[31.4%]',
+  cardPointContainer: 'absolute sm:w-[40px] w-[32px] sm:h-[40px] h-[32px] rounded-[25px] bottom-[16.5%]',
   cardPoint: 'font-rajdhani text-[20px] font-bold',
-  cardTextContainer: 'absolute w-full bottom-[13.5%] left-3',
+  cardTextContainer: 'absolute w-full bottom-[7.5%]',
   cardText: 'font-rajdhani text-[26px] font-bold text-white',
 
   // custom button component
@@ -53,7 +53,7 @@ const styles = {
 
   // custom input component
   label: 'font-rajdhani font-semibold text-2xl text-white mb-3',
-  input: 'bg-siteDimBlack text-white outline-none focus:outline-siteViolet p-4 rounded-md sm:max-w-[50%] max-w-full',
+  input: 'bg-red-200 text-red-700  font-rajdhani font-extrabold outline-none focus:outline-siteViolet p-4 rounded-md sm:max-w-[50%] max-w-full',
 
   // gameload component
   gameLoadContainer: 'absolute inset-0 z-10 w-full h-screen gameload flex-col',

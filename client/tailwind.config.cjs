@@ -6,7 +6,7 @@ module.exports = {
       colors: {
         siteblack: '#131519',
         siteDimBlack: '#191d23',
-        siteViolet: '#7f46f0',
+        siteViolet: '#3b82f6',
         siteWhite: '#9eacc7',
       },
       backgroundImage: {

@@ -15,18 +15,12 @@ const JoinBattle = () => {
 
     const handleClick = async (battleName) => {
         setBattleName(battleName);
-        // console.log("gameData", gameData)
-        // console.log(battleName)
-        // console.log(contract)
     
         try {
-          // await contract.joinBattle(battleName);
           await contract.joinBattle(battleName)
           console.log(`Joining ${battleName}`);
           setShowAlert({ status: true, type: 'success', message: `Joining ${battleName}` });
         } catch (error) {
-            // console.log(error);
-            // setShowAlert({ status: true, type: 'failure', message: `${error}` });
             setErrorMessage(error);
         }
       };

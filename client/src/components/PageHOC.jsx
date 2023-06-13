@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import Alert from './Alert';
 import { useGlobalContext } from '../context';
-import { logo, heroImg } from '../assets';
+import { hero2Img, cardariaLogo } from '../assets';
 import styles from '../styles';
 
 const PageHOC = (Component, title, description) => () => {
@@ -15,7 +15,7 @@ const PageHOC = (Component, title, description) => () => {
       {showAlert?.status && <Alert type={showAlert.type} message={showAlert.message} />}
 
       <div className={styles.hocContentBox}>
-        <img src={logo} alt="logo" className={styles.hocLogo} onClick={() => navigate('/')} />
+        <img src={cardariaLogo} alt="logo" className={styles.hocLogo} onClick={() => navigate('/')} />
 
         <div className={styles.hocBodyWrapper}>
           <div className="flex flex-row w-full">
@@ -27,11 +27,11 @@ const PageHOC = (Component, title, description) => () => {
           <Component />
         </div>
 
-        <p className={styles.footerText}>Made by Progjar Ganas</p>
+        <p className={styles.footerText}>ver 1.0.1 | <span className={`${styles.infoText}`}><a href="/dev"></a>Developer's Notes</span></p>
       </div>
 
       <div className="flex flex-1">
-        <img src={heroImg} alt="hero-img" className="w-full xl:h-full object-cover" />
+        <img src={hero2Img} alt="hero-img" className="w-full xl:h-full object-cover bg-rose-800" />
       </div>
     </div>
   );

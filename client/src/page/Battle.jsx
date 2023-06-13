@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import styles from '../styles';
 import { ActionButton, Alert, Card, GameInfo, PlayerInfo } from '../components';
 import { useGlobalContext } from '../context';
-import { attack, attackSound, defense, defenseSound, player01 as player01Icon, player02 as player02Icon } from '../assets';
+import { attack, attackSound, defense, defenseSound, player01icon as player01Icon, player02icon as player02Icon } from '../assets';
 import { playAudio } from '../utils/animation.js';
 
 const Battle = () => {
@@ -87,26 +87,18 @@ const Battle = () => {
                 cardRef={player1Ref}
                 playerTwo
             />
-
-            {/* <Card/> */}
-
             <div className="flex items-center flex-row">
-            {/* <ActionButton/> */}
             <ActionButton
                 imgUrl={attack}
                 handleClick={() => makeAMove(1)}
                 restStyles="mr-2 hover:border-yellow-400"
             />
-
             <Card
                 card={player1}
                 title={player1?.playerName}
                 cardRef={player2Ref}
                 restStyles="mt-3"
             />
-            {/* <Card/> */}
-
-            {/* <ActionButton/> */}
             <ActionButton
                 imgUrl={defense}
                 handleClick={() => makeAMove(2)}
