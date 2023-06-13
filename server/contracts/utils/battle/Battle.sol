@@ -2,10 +2,12 @@ pragma solidity ^0.8.0;
 
 import "../../helper/Helper.sol";
 import "./container/CreateBattle.sol";
+import "./container/JoinBattle.sol";
 
 library Battle {
     using Helper for *;
     using CreateBattle for *;
+    using JoinBattle for *;
 
     struct Battle {
         BattleStatus battleStatus;
@@ -39,10 +41,17 @@ library Battle {
         _battles[_battleInfo[_name]] = _newBattle;
     }
 
+    /// @dev Creates a new battle
+    /// @param _name battle name; set by player
     function createBattle(string memory _name) internal returns (CreateBattle.Battle memory) {
         return CreateBattle.createBattle(_name);
     }
     
+    /// @dev Player joins battle
+    /// @param _name battle name; name of battle player wants to join
+    function joinBattle() internal returns (Battle memory) {
+        return JoinBattle.joinBattle(battles, players, playerInfo, getBattle, updateBattle, getPlayer, isPlayer);
+    }
 
     // Add other battle-related functions as needed
 }
