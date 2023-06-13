@@ -31,7 +31,7 @@ const auth = firebase.auth();
 const firestore = firebase.firestore();
 const analytics = firebase.analytics();
 
-const PageHOC = (Component, title, description) => () => {
+const PageHOC = (Component, title, description, withChatBox=true) => () => {
   const { showAlert } = useGlobalContext();
   const navigate = useNavigate();
   const [user] = useAuthState(auth);
@@ -49,6 +49,7 @@ const PageHOC = (Component, title, description) => () => {
               <h1 className={`flex ${styles.headText} head-text`}>{title}</h1>
               <p className={`${styles.normalText} my-10`}>{description}</p>
             </div>
+            { withChatBox && (
             <div className="flex  bg-[#282c34] items-center justify-center w-full rounded-lg transition duration-500 shadow-lg scale-90 hover:shadow-2xl hover:scale-100">
               <div className="flex w-full bg-[#282c34] rounded-lg max-h-[256px]">
               <div className="App flex max-h-[256px] w-full overflow-hidden rounded-lg">
@@ -60,11 +61,12 @@ const PageHOC = (Component, title, description) => () => {
                 </div>
               </div>
             </div>
+          )}
           </div>
           <Component />
         </div>
 
-        <p className={styles.footerText}>ver 1.0.1 | <span className={`${styles.infoText}`}><a href="/dev"></a>Developer's Notes</span></p>
+        <p className={styles.footerText}>ver 1.0.1 | <span className={`${styles.infoText}`}><a href="/developer-notes">Developer's Notes</a></span></p>
       </div>
 
       <div className="flex flex-1">

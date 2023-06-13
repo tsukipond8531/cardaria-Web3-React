@@ -72,4 +72,5 @@ export default PageHOC(
   <>
     Online Web3 Multiplayer Card Game
   </>,
+   false
 );
