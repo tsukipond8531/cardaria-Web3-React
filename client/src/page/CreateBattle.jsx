@@ -11,22 +11,54 @@ const CreateBattle = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (gameData?.activeBattle?.battleStatus === 0) {
+    if (gameData?.activeBattle?.battleStatus === 1) {
+      // console.log('battleName', gameData.activeBattle.name )
       setWaitBattle(true);
-    //   navigate(`/battle/${gameData.activeBattle.name}`);
-    // } else if (gameData?.activeBattle?.battleStatus === 0) {
-    //   setWaitBattle(true);
+      navigate(`/battle/${gameData.activeBattle.name}`);
+    } else if (gameData?.activeBattle?.battleStatus === 0) {
+      // console.log('battleName', gameData.activeBattle.name )
+      setWaitBattle(true);
     }
   }, [gameData]);
 
-  console.log(gameData)
+  console.log("GAMEDATA:", gameData)
 
   const handleClick = async () => {
     if (battleName === '' || battleName.trim() === '') return null;
     try {
-      await contract.createBattle(battleName, { gasLimit: 50000 });
+      // console.log(battleName)
+      await contract.createBattle(battleName);
+      console.log(`Creating ${battleName}` )
       setShowAlert({ status: true, type: 'success', message: `Creating ${battleName}` });
       setWaitBattle(true);
+    } catch (error) {
+      setShowAlert({ status: true, type: 'failure', message: `${error}` });
+      console.log(error)
+      // setErrorMessage(error);
+    }
+  };
+
+  // const handleBattleExit = async () => {
+  //   const battleName = gameData.activeBattle.name;
+
+  //   try {
+  //     console.log('exit', battleName)
+  //     await contract.quitBattle(battleName, { gasLimit: 50000 });
+
+  //     console.log('exit', battleName)
+  //     console.log(`You're quitting the ${battleName}`)
+  //     setShowAlert({ status: true, type: 'info', message: `You're quitting the ${battleName}` });
+  //   } catch (error) {
+  //     console.log(error)
+  //     // setErrorMessage(error);
+  //   }
+  // };
+
+  const handleBattleName = async () => {
+    if (battleName === '' || battleName.trim() === '') return null;
+    try {
+      console.log("gameData", gameData)
+      console.log(battleName)
     } catch (error) {
       setShowAlert({ status: true, type: 'failure', message: `${error}` });
       console.log(error)
@@ -51,6 +83,16 @@ const CreateBattle = () => {
           handleClick={handleClick}
           restStyles="mt-6"
         />
+        <CustomButton
+          title="BattleName"
+          handleClick={handleBattleName}
+          restStyles="mt-6"
+        />
+        {/* <CustomButton
+          title="Exit"
+          handleClick={handleBattleExit}
+          restStyles="mt-6"
+        /> */}
       </div>
       <p className={styles.infoText} onClick={() => navigate('/join-battle')}>
         Or join already existing battles
