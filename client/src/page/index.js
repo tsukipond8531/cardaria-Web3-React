@@ -4,6 +4,7 @@ import JoinBattle from "./JoinBattle";
 import Battle from "./Battle";
 import Battleground from "./Battleground";
 import Chat from "./Chat";
+import DeveloperNotes from "./DeveloperNotes";
 
 export {
     Home,
@@ -11,5 +12,6 @@ export {
     JoinBattle,
     Battle,
     Battleground,
-    Chat
+    Chat,
+    DeveloperNotes
 }
