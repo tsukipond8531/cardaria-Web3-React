@@ -1,14 +1,40 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Alert from './Alert';
 import { useGlobalContext } from '../context';
 import { hero2Img, cardariaLogo } from '../assets';
 import styles from '../styles';
+import { ChatRoom, SignOut, SignIn } from '../page/Chat';
+
+import PropTypes from 'prop-types';
+
+import firebase from 'firebase/compat/app'; 
+import 'firebase/compat/firestore';
+import 'firebase/compat/auth';   
+import 'firebase/compat/analytics';    
+
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
+
+firebase.initializeApp({
+    apiKey: "AIzaSyCAjbQCoyLgGnNE_208n43AnBIwm8rVKrw",
+    authDomain: "gamechat-18c1d.firebaseapp.com",
+    projectId: "gamechat-18c1d",
+    storageBucket: "gamechat-18c1d.appspot.com",
+    messagingSenderId: "1042124522594",
+    appId: "1:1042124522594:web:473dc22e3008439ff07d3b",
+    measurementId: "G-0B538W5VT2"
+  })
+  
+const auth = firebase.auth();
+const firestore = firebase.firestore();
+const analytics = firebase.analytics();
 
 const PageHOC = (Component, title, description) => () => {
   const { showAlert } = useGlobalContext();
   const navigate = useNavigate();
+  const [user] = useAuthState(auth);
 
   return (
     <div className={styles.hocContainer}>
@@ -18,12 +44,28 @@ const PageHOC = (Component, title, description) => () => {
         <img src={cardariaLogo} alt="logo" className={styles.hocLogo} onClick={() => navigate('/')} />
 
         <div className={styles.hocBodyWrapper}>
-          <div className="flex flex-row w-full">
-            <h1 className={`flex ${styles.headText} head-text`}>{title}</h1>
+          <div className="flex w-full">
+            <div className="flex flex-col w-full justify-center">
+              <h1 className={`flex ${styles.headText} head-text`}>{title}</h1>
+              <p className={`${styles.normalText} my-10`}>{description}</p>
+            </div>
+            <div className="flex  bg-siteblack items-center justify-center w-full">
+              <div className="flex w-full bg-siteblack max-h-[256px]">
+              <div className="App flex max-h-[256px] w-full overflow-hidden">
+
+                  <section className="flex flex-col justify-start h-full w-full">
+                    <div className="text-white">
+                      <SignOut />
+                    </div>
+                    <div className="flex w-full justify-center h-full">
+                      {user ? <ChatRoom /> : <SignIn />}
+                    </div>
+                  </section>
+            
+                </div>
+              </div>
+            </div>
           </div>
-
-          <p className={`${styles.normalText} my-10`}>{description}</p>
-
           <Component />
         </div>
 

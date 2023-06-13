@@ -46,7 +46,7 @@ const Chat = () => {
     )
   }
 
-function SignIn() {
+export function SignIn() {
 
     const signInWithGoogle = () => {
       const provider = new firebase.auth.GoogleAuthProvider();
@@ -62,13 +62,13 @@ function SignIn() {
   
   }
   
-  function SignOut() {
+export function SignOut() {
     return auth.currentUser && (
       <button className="sign-out" onClick={() => auth.signOut()}>Sign Out</button>
     )
   }
   
-  function ChatRoom() {
+export  function ChatRoom() {
     const dummy = useRef();
     const messagesRef = firestore.collection('messages');
     const query = messagesRef.orderBy('createdAt').limit(25);
@@ -95,21 +95,16 @@ function SignIn() {
     }
   
     return (<>
-      <main>
-  
+      <main className="chat-main">
         {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg} />)}
-  
         <span ref={dummy}></span>
-  
+        <form onSubmit={sendMessage} className="chat-form absolute">
+            <input value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="say something nice" />
+            <button type="submit" disabled={!formValue}>🕊️</button>
+        </form>
       </main>
   
-      <form onSubmit={sendMessage}>
-  
-        <input value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="say something nice" />
-  
-        <button type="submit" disabled={!formValue}>🕊️</button>
-  
-      </form>
+
     </>)
   }
   
@@ -121,8 +116,8 @@ function SignIn() {
   
     return (
       <div className={`message ${messageClass}`}>
-        <img src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} />
-        <p>{text}</p>
+        <img src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} className='chat-img my-2 mx-5' />
+        <p className='chat-p '>{text}</p>
       </div>
     );
   }

@@ -33,13 +33,13 @@ body {
   background-color: rgb(40, 37, 53);
 }
 
-main {
+.chat-main {
   padding: 10px;
-  height: 80vh;
-  margin: 10vh 0 10vh;
+  height: 64vh;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
+  justify-content: start;
 }
 
 main::-webkit-scrollbar {
@@ -54,24 +54,20 @@ main::-webkit-scrollbar-thumb {
   background: #6649b8;
 }
 
-form {
-  height: 10vh;
+.chat-form {
   position: fixed;
-  bottom: 0;
   background-color: rgb(24, 23, 23);
-  width: 100%;
-  max-width: 728px;
   display: flex;
   font-size: 1.5rem;
 }
 
-form button {
+.chat-form button {
   width: 20%;
   background-color: rgb(56, 56, 143);
 }
 
 
-input {
+.chat-input {
   line-height: 1.5;
   width: 100%;
   font-size: 1.5rem;
@@ -82,7 +78,7 @@ input {
   padding: 0 10px;
 }
 
-button {
+.chat-button {
   background-color: #282c34; /* Green */
   border: none;
   color: white;
@@ -94,7 +90,7 @@ button {
   font-size: 1.25rem;
 }
 
-button:disabled {
+.chat-button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
@@ -115,7 +111,7 @@ ul, li {
   list-style: none;
 }
 
-p {
+.chat-p {
   max-width: 500px;
   margin-bottom: 12px;
   line-height: 24px;
@@ -146,7 +142,7 @@ p {
   color: black;
 }
 
-img {
+.chat-img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
