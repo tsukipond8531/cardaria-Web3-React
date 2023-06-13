@@ -15,7 +15,6 @@ const Home = () => {
       const playerExists = await contract.isPlayer(walletAddress);
 
       if(!playerExists) {
-        // await contract.registerPlayer(playerName, playerName, { gasLimit: 500000 });
         await contract.registerPlayer(playerName, playerName);
 
         setShowAlert({
@@ -26,8 +25,6 @@ const Home = () => {
       }
     } catch (error) {
       setErrorMessage(error);
-      // alert(error);
-      // console.log(error);
     }
   }
 
@@ -35,8 +32,6 @@ const Home = () => {
     const checkForPlayerToken = async () => {
       const playerExists = await contract.isPlayer(walletAddress);
       const playerTokenExists = await contract.isPlayerToken(walletAddress);
-
-      // console.log({playerExists, playerTokenExists })
 
       if (playerExists && playerTokenExists) navigate('/create-battle');
     };

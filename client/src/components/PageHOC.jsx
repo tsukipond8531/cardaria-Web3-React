@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import Alert from './Alert';
 import { useGlobalContext } from '../context';
-import { logo, heroImg, hero2Img, cardariaLogo } from '../assets';
+import { hero2Img, cardariaLogo } from '../assets';
 import styles from '../styles';
 
 const PageHOC = (Component, title, description) => () => {
