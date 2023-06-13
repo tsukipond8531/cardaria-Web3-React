@@ -33,7 +33,7 @@ const PlayerInfo = ({ player, playerIcon, mt }) => {
       {player.mana || 0}
     </div>
 
-    <ReactTooltip id={`Player-${mt ? '1' : '2'}`} effect="solid" backgroundColor="#7f46f0">
+    <ReactTooltip id={`Player-${mt ? '1' : '2'}`} effect="solid" backgroundColor="#3b82f6">
       <p className={styles.playerInfo}>
         <span className={styles.playerInfoSpan}>Name:</span> {player?.playerName}
       </p>
@@ -41,8 +41,8 @@ const PlayerInfo = ({ player, playerIcon, mt }) => {
         <span className={styles.playerInfoSpan}>Address:</span> {player?.playerAddress?.slice(0, 10)}
       </p>
     </ReactTooltip>
-    <ReactTooltip id={`Health-${mt ? '1' : '2'}`} effect="solid" backgroundColor="#7f46f0" />
-    <ReactTooltip id={`Mana-${mt ? '1' : '2'}`} effect="solid" backgroundColor="#7f46f0" />
+    <ReactTooltip id={`Health-${mt ? '1' : '2'}`} effect="solid" backgroundColor="#3b82f6" />
+    <ReactTooltip id={`Mana-${mt ? '1' : '2'}`} effect="solid" backgroundColor="#3b82f60" />
   </div>
   )
 }

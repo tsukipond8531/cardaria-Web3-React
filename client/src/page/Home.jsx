@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { CustomButton, CustomInput, PageHOC } from '../components';
 import { useGlobalContext } from '../context';
 import { useNavigate } from 'react-router-dom';
+import styles from '../styles';
 
 const Home = () => {
   const {contract, gameData, walletAddress, setShowAlert, setErrorMessage} = useGlobalContext();
@@ -51,6 +52,7 @@ const Home = () => {
 
   return (
     <div className='flex flex-col'>
+      <p className={`${styles.infoText} font-bold mb-6`}>Connect your wallet and register to start playing</p>
       <CustomInput
         label="Name"
         placeholder="Enter your player name"
@@ -70,10 +72,9 @@ const Home = () => {
 export default PageHOC(
   Home,
   <>
-    Welcome to Avax Gods <br /> a Web3 NFT Card Game
+    Welcome to Cardaria
   </>,
   <>
-    Connect your wallet to start playing <br /> the ultimate Web3 Battle Card
-    Game
+    Online Web3 Multiplayer Card Game
   </>,
 );
