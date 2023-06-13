@@ -96,5 +96,13 @@ contract Cardaria is ERC1155, Ownable, ERC1155Supply {
     function registerPlayer(string memory _name, string memory _gameTokenName) external {
         GameUtils.registerPlayer(this, _name, _gameTokenName);
     }
+
+    function createRandomGameToken(string memory _name) public {
+        GameUtils.createRandomGameToken(this, _name);
+    }
+
+    function getTotalSupply() external view returns (uint256) {
+        return totalSupply;
+    }
     // Rest of the contract code...
 }
