@@ -4,7 +4,7 @@ import { useGlobalContext } from '../context';
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
-  const {contract, walletAddress, setShowAlert, setErrorMessage} = useGlobalContext();
+  const {contract, gameData, walletAddress, setShowAlert, setErrorMessage} = useGlobalContext();
   const [playerName, setplayerName] = useState('')
   const navigate = useNavigate();
 
@@ -42,6 +42,12 @@ const Home = () => {
 
     if (contract) checkForPlayerToken();
   }, [contract]);
+
+  useEffect(() => {
+    if (gameData.activeBattle) {
+      navigate(`/battle/${gameData.activeBattle.name}`);
+    }
+  }, [gameData]);
 
   return (
     <div className='flex flex-col'>

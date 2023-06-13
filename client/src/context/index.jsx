@@ -96,6 +96,7 @@ export const GlobalContextProvider = ({children}) => {
           setUpdateGameData,
           player1Ref,
           player2Ref,
+          updateCurrentWalletAddress
         });
       }
     }, [contract, step]);
