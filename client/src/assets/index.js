@@ -13,7 +13,7 @@ import black_widow from './characters/BlackWidow.png';
 import captain_america from './characters/CaptainAmerica.png';
 import doctor_strange from './characters/DoctorStrange.png';
 import hulk from './characters/Hulk.png';
-import ikaris from './characters/ikaris.png';
+import ikaris from './characters/Ikaris.png';
 import iron_man from './characters/IronMan.png';
 import peter_quill from './characters/PeterQuill.png';
 import sangchi from './characters/Sangchi.png';
