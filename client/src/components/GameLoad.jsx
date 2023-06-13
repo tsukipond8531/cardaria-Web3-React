@@ -7,8 +7,25 @@ import { player01, player02 } from '../assets';
 import styles from '../styles';
 
 const GameLoad = () => {
-    const { walletAddress } = useGlobalContext();
+    const { walletAddress, contract, gameData, setErrorMessage, setShowAlert } = useGlobalContext();
     const navigate = useNavigate();
+
+    const handleBattleExit = async () => {
+      const battleName = gameData.activeBattle.name;
+  
+      try {
+        console.log('exit', battleName)
+        await contract.quitBattle(battleName, { gasLimit: 50000 });
+
+        console.log('exit', battleName)
+        console.log(`You're quitting the ${battleName}`)
+        setShowAlert({ status: true, type: 'info', message: `You're quitting the ${battleName}` });
+      } catch (error) {
+        console.log(error)
+        // setErrorMessage(error);
+      }
+    };
+  
 
   return (
     <div className={`${styles.flexBetween} ${styles.gameLoadContainer}`}>
@@ -18,6 +35,9 @@ const GameLoad = () => {
         handleClick={() => navigate('/battleground')}
         restStyles="mt-6"
       />
+    </div>
+    <div className={styles.gameLoadBtnBox}>
+      <CustomButton title="Exit Battle" handleClick={() => handleBattleExit()} restStyles="mt-6" />
     </div>
 
     <div className={`flex-1 ${styles.flexCenter} flex-col`}>

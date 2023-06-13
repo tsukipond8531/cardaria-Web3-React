@@ -13,8 +13,10 @@ const Battle = () => {
     const { battleName } = useParams();
 
     const navigate = useNavigate();
-    console.log('p1',player1)
-    console.log('p1',player2)
+    // console.log('p1',player1)
+    // console.log('p1',player2)
+    console.log('p1',gameData.activeBattle.players[0])
+    console.log('p1',gameData.activeBattle.players[1])
 
     useEffect(() => {
         const getPlayerInfo = async () => {

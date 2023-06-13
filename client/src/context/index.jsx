@@ -17,6 +17,9 @@ export const GlobalContextProvider = ({children}) => {
     const [updateGameData, setUpdateGameData] = useState(0);
     const [battleGround, setBattleGround] = useState('bg-panight');
 
+    const player1Ref = useRef();
+    const player2Ref = useRef();
+
     const navigate = useNavigate();
 
     //* Set the wallet address to the state
@@ -68,7 +71,7 @@ export const GlobalContextProvider = ({children}) => {
           // setUpdateGameData,
         });
       }
-    }, []);
+    }, [contract]);
 
     //* Set the game data to the state
     useEffect(() => {
@@ -86,26 +89,12 @@ export const GlobalContextProvider = ({children}) => {
           }
         });
 
+        console.log("fetchecBattles", fetchedBattles)
+
         setGameData({ pendingBattles: pendingBattles.slice(1), activeBattle });
       }
-        if (contract) {
-        //   const pendingBattles = fetchedBattles.filter((battle) => battle.battleStatus === 0);
-        //   let activeBattle = null;
+        if (contract) fetchGameData();
 
-        //   fetchedBattles.forEach((battle) => {
-        //     if (battle.players.find((player) => player.toLowerCase() === walletAddress.toLowerCase())) {
-        //       if (battle.winner.startsWith('0x00')) {
-        //         activeBattle = battle;
-        //       }
-        //     }
-        //   });
-
-        //   setGameData({ pendingBattles: pendingBattles.slice(1), activeBattle });
-        // }
-        fetchGameData();
-      };
-
-      // fetchGameData();
     }, [contract, updateGameData])
 
     //* Handle alerts

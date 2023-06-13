@@ -21,8 +21,8 @@ const JoinBattle = () => {
     
         try {
           // await contract.joinBattle(battleName);
-          await contract.joinBattle(battleName, { gasLimit: 50000 })
-    
+          await contract.joinBattle(battleName)
+          console.log(`Joining ${battleName}`);
           setShowAlert({ status: true, type: 'success', message: `Joining ${battleName}` });
         } catch (error) {
             console.log(error);
@@ -31,7 +31,7 @@ const JoinBattle = () => {
         }
       };
     
-      console.log(gameData)
+      console.log("GAMEDATA JOINLIST:", gameData)
       
   return (
     <>
