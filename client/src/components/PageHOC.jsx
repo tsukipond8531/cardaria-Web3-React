@@ -49,19 +49,14 @@ const PageHOC = (Component, title, description) => () => {
               <h1 className={`flex ${styles.headText} head-text`}>{title}</h1>
               <p className={`${styles.normalText} my-10`}>{description}</p>
             </div>
-            <div className="flex  bg-siteblack items-center justify-center w-full">
-              <div className="flex w-full bg-siteblack max-h-[256px]">
-              <div className="App flex max-h-[256px] w-full overflow-hidden">
-
+            <div className="flex  bg-[#282c34] items-center justify-center w-full rounded-lg transition duration-500 shadow-lg scale-90 hover:shadow-2xl hover:scale-100">
+              <div className="flex w-full bg-[#282c34] rounded-lg max-h-[256px]">
+              <div className="App flex max-h-[256px] w-full overflow-hidden rounded-lg">
                   <section className="flex flex-col justify-start h-full w-full">
-                    <div className="text-white">
-                      <SignOut />
-                    </div>
                     <div className="flex w-full justify-center h-full">
                       {user ? <ChatRoom /> : <SignIn />}
                     </div>
                   </section>
-            
                 </div>
               </div>
             </div>

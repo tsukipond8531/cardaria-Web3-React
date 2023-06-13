@@ -31,13 +31,13 @@ const Chat = () => {
 
     return (
       <>
-      <div className="App">
+      <div className="App flex w-full h-[128px] max-h-[128px]">
         <header>
           <h1>⚛️🔥💬</h1>
           <SignOut />
         </header>
   
-        <section>
+        <section className="flex w-full">
           {user ? <ChatRoom /> : <SignIn />}
         </section>
   
@@ -64,14 +64,14 @@ export function SignIn() {
   
 export function SignOut() {
     return auth.currentUser && (
-      <button className="sign-out" onClick={() => auth.signOut()}>Sign Out</button>
+      <button className="sign-out bg-rose-800 p-1 rounded font-semibold" onClick={() => auth.signOut()}>Sign Out</button>
     )
   }
   
 export  function ChatRoom() {
     const dummy = useRef();
     const messagesRef = firestore.collection('messages');
-    const query = messagesRef.orderBy('createdAt').limit(25);
+    const query = messagesRef.orderBy('createdAt');
   
     const [messages] = useCollectionData(query, { idField: 'id' });
   
@@ -94,16 +94,23 @@ export  function ChatRoom() {
       dummy.current.scrollIntoView({ behavior: 'smooth' });
     }
   
-    return (<>
-      <main className="chat-main">
-        {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg} />)}
-        <span ref={dummy}></span>
-        <form onSubmit={sendMessage} className="chat-form absolute">
-            <input value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="say something nice" />
-            <button type="submit" disabled={!formValue}>🕊️</button>
-        </form>
-      </main>
-  
+    return (
+    <>
+    <div className="flex flex-col w-full rounded-lg">
+        <div className="text-white flex justify-end mr-5">
+            <SignOut />
+        </div>
+        <main className="chat-main flex w-full relative">
+            {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg} />)}
+            <span ref={dummy}></span>
+        </main>
+        <div className="relative">
+            <form onSubmit={sendMessage} className="chat-form flex w-[432px] fixed rounded-b-md">
+                <input className='w-[384px] lg:[256px] text-blue-500 pl-2 rounded-bl-md  placeholder:text-xl'  value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="do not trash talk..." />
+                <button className="rounded-b-md bg-blue-500" type="submit" disabled={!formValue}>🕊️</button>
+            </form>
+        </div>
+    </div>
 
     </>)
   }
@@ -115,9 +122,9 @@ export  function ChatRoom() {
     const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
   
     return (
-      <div className={`message ${messageClass}`}>
+      <div className={`message ${messageClass} `}>
         <img src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} className='chat-img my-2 mx-5' />
-        <p className='chat-p '>{text}</p>
+        <p className='chat-p bg-blue-500'>{text}</p>
       </div>
     );
   }

@@ -35,11 +35,9 @@ body {
 
 .chat-main {
   padding: 10px;
-  height: 64vh;
+  height: 225px;
   overflow-y: scroll;
-  display: flex;
   flex-direction: column;
-  justify-content: start;
 }
 
 main::-webkit-scrollbar {
@@ -55,15 +53,12 @@ main::-webkit-scrollbar-thumb {
 }
 
 .chat-form {
-  position: fixed;
   background-color: rgb(24, 23, 23);
-  display: flex;
   font-size: 1.5rem;
 }
 
 .chat-form button {
   width: 20%;
-  background-color: rgb(56, 56, 143);
 }
 
 
@@ -103,9 +98,6 @@ main::-webkit-scrollbar-thumb {
   margin: 0 auto;
 }
 
-
-
-
 ul, li {
   text-align: left;
   list-style: none;
@@ -134,12 +126,14 @@ ul, li {
 
 .sent p {
   color: white;
-  background: #0b93f6;
+  background: #3b82f6;
   align-self: flex-end;
+  font-weight: 400;
 }
 .received p {
   background: #e5e5ea;
-  color: black;
+  color: #3b82f6;
+  font-weight: 400;
 }
 
 .chat-img {
