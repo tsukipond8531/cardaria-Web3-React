@@ -3,11 +3,15 @@ pragma solidity ^0.8.0;
 import "../../helper/Helper.sol";
 import "./container/CreateBattle.sol";
 import "./container/JoinBattle.sol";
+import "./container/ReadBattleMoves.sol";
+import "./container/EndBattle.sol";
 
 library Battle {
     using Helper for *;
     using CreateBattle for *;
     using JoinBattle for *;
+    using ReadBattleMoves for *;
+    using EndBattle for *;
 
     struct Battle {
         BattleStatus battleStatus;
