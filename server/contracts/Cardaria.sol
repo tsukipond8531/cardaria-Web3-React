@@ -8,6 +8,7 @@ import "./helper/Helper.sol";
 // import "./GameToken.sol";
 import "./utils/player/PlayerUtils.sol";
 import "./utils/battle/Battle.sol";
+import "./utils/GameUtils.sol";
 
 contract Cardaria is ERC1155, Ownable, ERC1155Supply {
     string public baseURI; // baseURI where token metadata is stored
@@ -73,5 +74,27 @@ contract Cardaria is ERC1155, Ownable, ERC1155Supply {
     event BattleMove(string indexed battleName, bool indexed isFirstMove);
     event NewGameToken(address indexed owner, uint256 id, uint256 attackStrength, uint256 defenseStrength);
     event RoundEnded(address[2] damagedPlayers);
+
+    /// @dev Initializes the contract by setting a `metadataURI` to the token collection
+    /// @param _metadataURI baseURI where token metadata is stored
+    constructor(string memory _metadataURI) ERC1155(_metadataURI) {
+        baseURI = _metadataURI; // Set baseURI
+        initialize();
+    }
+
+    function setURI(string memory newuri) public onlyOwner {
+        _setURI(newuri);
+    }
+
+    function initialize() private {
+        gameTokens.push(GameToken("", 0, 0, 0));
+        players.push(Player(address(0), "", 0, 0, false));
+        battles.push(Battle(BattleStatus.PENDING, bytes32(0), "", [address(0), address(0)], [0, 0], address(0)));
+    }
+
+    //registerPlayer
+    function registerPlayer(string memory _name, string memory _gameTokenName) external {
+        GameUtils.registerPlayer(this, _name, _gameTokenName);
+    }
     // Rest of the contract code...
 }
