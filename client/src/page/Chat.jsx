@@ -54,10 +54,11 @@ export function SignIn() {
     }
   
     return (
-      <>
-        <button className="sign-in" onClick={signInWithGoogle}>Sign in with Google</button>
-        <p>Do not violate the community guidelines or you will be banned for life!</p>
-      </>
+      <div className="flex flex-col  w-full">
+        <p className="text-white font-bold text-xl mt-16 mb-2">CARDARIA CHAT BOX</p>
+        <button className="sign-in p-2 bg-blue-500 rounded text-white" onClick={signInWithGoogle}>Join Chat!</button>
+        <p className="text-white">Do not violate the community guidelines or you will be banned for life!</p>
+      </div>
     )
   
   }
@@ -97,7 +98,8 @@ export  function ChatRoom() {
     return (
     <>
     <div className="flex flex-col w-full rounded-lg">
-        <div className="text-white flex justify-end mr-5">
+        <div className="text-white flex justify-between mx-5">
+            <p className="text-white font-semibold text-xl">Chat Box:</p>
             <SignOut />
         </div>
         <main className="chat-main flex w-full relative">
