@@ -18,6 +18,7 @@ export const GlobalContextProvider = ({children}) => {
     const [updateGameData, setUpdateGameData] = useState(0);
     const [battleGround, setBattleGround] = useState('bg-panight');
     const [step, setStep] = useState(1);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const player1Ref = useRef();
     const player2Ref = useRef();
@@ -92,10 +93,10 @@ export const GlobalContextProvider = ({children}) => {
           provider,
           walletAddress,
           setShowAlert,
-          setUpdateGameData
-          // player1Ref,
-          // player2Ref,
-          // setUpdateGameData,
+          setUpdateGameData,
+          player1Ref,
+          player2Ref,
+          updateCurrentWalletAddress
         });
       }
     }, [contract, step]);
@@ -115,8 +116,6 @@ export const GlobalContextProvider = ({children}) => {
           }
         });
 
-        console.log("fetchecBattles", fetchedBattles)
-
         setGameData({ pendingBattles: pendingBattles.slice(1), activeBattle });
       }
         if (contract) fetchGameData();
@@ -134,6 +133,21 @@ export const GlobalContextProvider = ({children}) => {
       }
     }, [showAlert]);
 
+    //* Handle ERROR
+    useEffect(() => {
+      if (errorMessage) {
+        const parsedErrorMessage = errorMessage?.reason?.slice('execution reverted: '.length).slice(0, -1);
+  
+        if (parsedErrorMessage) {
+          setShowAlert({
+            status: true,
+            type: 'failure',
+            message: parsedErrorMessage,
+          });
+        }
+      }
+    }, [errorMessage]);
+
     return (
         <GlobalContext.Provider
           value={{
@@ -145,7 +159,11 @@ export const GlobalContextProvider = ({children}) => {
             setBattleName,
             gameData,
             battleGround,
-            setBattleGround
+            setBattleGround,
+            errorMessage,
+            setErrorMessage,
+            player1Ref,
+            player2Ref,
           }}
         >
           {children}

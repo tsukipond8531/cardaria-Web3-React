@@ -4,21 +4,15 @@ import styles from '../styles';
 import { ActionButton, Alert, Card, GameInfo, PlayerInfo } from '../components';
 import { useGlobalContext } from '../context';
 import { attack, attackSound, defense, defenseSound, player01 as player01Icon, player02 as player02Icon } from '../assets';
-// import { playAudio } from '../utils/animation.js';
+import { playAudio } from '../utils/animation.js';
 
 const Battle = () => {
-    const { contract, gameData, walletAddress, showAlert, setShowAlert, battleGround } = useGlobalContext();
+    const { contract, gameData, walletAddress, showAlert, setShowAlert, battleGround, setErrorMessage, player1Ref, player2Ref } = useGlobalContext();
     const [player2, setPlayer2] = useState({});
     const [player1, setPlayer1] = useState({});
     const { battleName } = useParams();
 
     const navigate = useNavigate();
-    // console.log('p1',player1)
-    // console.log('p1',player2)
-    // console.log('p1',gameData.activeBattle.players[0])
-    // console.log('p1',gameData.activeBattle.players[1])
-
-    // console.log('players',players)
 
     useEffect(() => {
         const getPlayerInfo = async () => {
@@ -48,15 +42,37 @@ const Battle = () => {
             setPlayer1({ ...player01, att: p1Att, def: p1Def, health: p1H, mana: p1M });
             setPlayer2({ ...player02, att: 'X', def: 'X', health: p2H, mana: p2M });
           } catch (error) {
-            console.log("error", error);
-            // setErrorMessage(error.message);
+            setErrorMessage(error.message);
           }
         };
     
         if (contract && gameData.activeBattle) getPlayerInfo();
       }, [contract, gameData, battleName]);
 
-      // console.log({contract, gameData, battleName})
+      const makeAMove = async (choice) => {
+        playAudio(choice === 1 ? attackSound : defenseSound);
+    
+        try {
+          await contract.attackOrDefendChoice(choice, battleName, { gasLimit: 200000 });
+    
+          setShowAlert({
+            status: true,
+            type: 'info',
+            message: `Initiating ${choice === 1 ? 'attack' : 'defense'}`,
+          });
+        } catch (error) {
+          console.log(error)
+          setErrorMessage(error);
+        }
+      };
+
+      useEffect(() => {
+        const timer = setTimeout(() => {
+          if (!gameData?.activeBattle) navigate('/');
+        }, [2000]);
+    
+        return () => clearTimeout(timer);
+      }, []);
 
   return (
     <div className={`${styles.flexBetween} ${styles.gameContainer} ${battleGround}`}>
@@ -68,7 +84,7 @@ const Battle = () => {
             <Card
                 card={player2}
                 title={player2?.playerName}
-                // cardRef=''
+                cardRef={player1Ref}
                 playerTwo
             />
 
@@ -85,7 +101,7 @@ const Battle = () => {
             <Card
                 card={player1}
                 title={player1?.playerName}
-                // cardRef=''
+                cardRef={player2Ref}
                 restStyles="mt-3"
             />
             {/* <Card/> */}

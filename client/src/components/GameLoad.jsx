@@ -10,23 +10,6 @@ const GameLoad = () => {
     const { walletAddress, contract, gameData, setErrorMessage, setShowAlert } = useGlobalContext();
     const navigate = useNavigate();
 
-    const handleBattleExit = async () => {
-      const battleName = gameData.activeBattle.name;
-  
-      try {
-        console.log('exit', battleName)
-        await contract.quitBattle(battleName, { gasLimit: 50000 });
-
-        console.log('exit', battleName)
-        console.log(`You're quitting the ${battleName}`)
-        setShowAlert({ status: true, type: 'info', message: `You're quitting the ${battleName}` });
-      } catch (error) {
-        console.log(error)
-        // setErrorMessage(error);
-      }
-    };
-  
-
   return (
     <div className={`${styles.flexBetween} ${styles.gameLoadContainer}`}>
     <div className={styles.gameLoadBtnBox}>

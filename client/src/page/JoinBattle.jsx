@@ -6,7 +6,7 @@ import { CustomButton, PageHOC } from '../components';
 import styles from '../styles';
 
 const JoinBattle = () => {
-    const { contract, gameData, setShowAlert, setBattleName, walletAddress } = useGlobalContext();
+    const { contract, gameData, setShowAlert, setBattleName, walletAddress, setErrorMessage } = useGlobalContext();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -16,7 +16,7 @@ const JoinBattle = () => {
     const handleClick = async (battleName) => {
         setBattleName(battleName);
         // console.log("gameData", gameData)
-        console.log(battleName)
+        // console.log(battleName)
         // console.log(contract)
     
         try {
@@ -25,9 +25,9 @@ const JoinBattle = () => {
           console.log(`Joining ${battleName}`);
           setShowAlert({ status: true, type: 'success', message: `Joining ${battleName}` });
         } catch (error) {
-            console.log(error);
-            setShowAlert({ status: true, type: 'failure', message: `${error}` });
-        //   setErrorMessage(error);
+            // console.log(error);
+            // setShowAlert({ status: true, type: 'failure', message: `${error}` });
+            setErrorMessage(error);
         }
       };
     
