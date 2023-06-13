@@ -6,6 +6,8 @@ import 'firebase/compat/firestore';
 import 'firebase/compat/auth';   
 import 'firebase/compat/analytics';    
 
+import '../styles/Chat.css'
+
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
