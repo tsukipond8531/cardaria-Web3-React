@@ -46,7 +46,7 @@ const Battle = () => {
             setPlayer1({ ...player01, att: p1Att, def: p1Def, health: p1H, mana: p1M });
             setPlayer2({ ...player02, att: 'X', def: 'X', health: p2H, mana: p2M });
           } catch (error) {
-            console.log(error);
+            console.log("error", error);
             // setErrorMessage(error.message);
           }
         };
@@ -54,7 +54,7 @@ const Battle = () => {
         if (contract && gameData.activeBattle) getPlayerInfo();
       }, [contract, gameData, battleName]);
 
-      console.log({contract, gameData, battleName})
+      // console.log({contract, gameData, battleName})
 
   return (
     <div className={`${styles.flexBetween} ${styles.gameContainer} ${battleGround}`}>

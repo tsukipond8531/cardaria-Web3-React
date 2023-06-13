@@ -22,6 +22,17 @@ export const GlobalContextProvider = ({children}) => {
 
     const navigate = useNavigate();
 
+    //* Set battleground to local storage
+    useEffect(() => {
+      const isBattleground = localStorage.getItem('battleground');
+
+      if (isBattleground) {
+        setBattleGround(isBattleground);
+      } else {
+        localStorage.setItem('battleground', battleGround);
+      }
+    }, []);
+
     //* Set the wallet address to the state
     const updateCurrentWalletAddress = async () => {
       const accounts = await window?.ethereum?.request({ method: 'eth_accounts' });
@@ -78,7 +89,6 @@ export const GlobalContextProvider = ({children}) => {
       const fetchGameData = async () => {
         const fetchedBattles = await contract.getAllBattles();
         const pendingBattles = fetchedBattles.filter((battle) => battle.battleStatus === 0);
-        // console.log(fetchedBattles)
         let activeBattle = null;
 
         fetchedBattles.forEach((battle) => {
