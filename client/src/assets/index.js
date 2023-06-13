@@ -39,6 +39,8 @@ import xho from './Xho.png';
 
 // logo
 import logo from './logo.svg';
+// import cardariaLogo from './cardariaLogo.svg';
+import cardariaLogo from './CardariaLogo.png';
 
 // icon
 import attack from './attack.png';
@@ -127,6 +129,7 @@ export {
   xho,
 
   logo,
+  cardariaLogo,
 
   attack,
   defense,
