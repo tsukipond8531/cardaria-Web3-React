@@ -105,11 +105,44 @@ contract Cardaria is ERC1155, Ownable, ERC1155Supply {
     function getTotalSupply() external view returns (uint256) {
         return totalSupply;
     }
+    // Turns uint256 into string
+    function uintToStr(uint256 _i) internal pure returns (string memory _uintAsString) {
+        if (_i == 0) {
+        return '0';
+        }
+        uint256 j = _i;
+        uint256 len;
+        while (j != 0) {
+        len++;
+        j /= 10;
+        }
+        bytes memory bstr = new bytes(len);
+        uint256 k = len;
+        while (_i != 0) {
+        k = k - 1;
+        uint8 temp = (48 + uint8(_i - (_i / 10) * 10));
+        bytes1 b1 = bytes1(temp);
+        bstr[k] = b1;
+        _i /= 10;
+        }
+        return string(bstr);
+    }
 
-    /// @dev Creates a new battle
-    /// @param _name battle name; set by player
+    // Token URI getter function
+    function tokenURI(uint256 tokenId) public view returns (string memory) {
+        return string(abi.encodePacked(baseURI, '/', uintToStr(tokenId), '.json'));
+    }
 
-    
-
+    // The following functions are overrides required by Solidity.
+    function _beforeTokenTransfer(
+        address operator,
+        address from,
+        address to,
+        uint256[] memory ids,
+        uint256[] memory amounts,
+        bytes memory data
+    ) internal override(ERC1155, ERC1155Supply) {
+        super._beforeTokenTransfer(operator, from, to, ids, amounts, data);
+    }
     // Rest of the contract code...
 }
