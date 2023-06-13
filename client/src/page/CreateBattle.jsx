@@ -67,11 +67,11 @@ const CreateBattle = () => {
           handleClick={handleClick}
           restStyles="mt-6"
         />
-        <CustomButton
+        {/* <CustomButton
           title="BattleName"
           handleClick={handleBattleName}
           restStyles="mt-6"
-        />
+        /> */}
         {/* <CustomButton
           title="Exit"
           handleClick={handleBattleExit}
