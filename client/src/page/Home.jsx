@@ -4,7 +4,7 @@ import { useGlobalContext } from '../context';
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
-  const {contract, walletAddress, setShowAlert} = useGlobalContext();
+  const {contract, walletAddress, setShowAlert, setErrorMessage} = useGlobalContext();
   const [playerName, setplayerName] = useState('')
   const navigate = useNavigate();
 
@@ -24,11 +24,7 @@ const Home = () => {
         })
       }
     } catch (error) {
-      setShowAlert({
-        status: true,
-        type: 'failure',
-        message: error.message
-      })
+      setErrorMessage(error);
       // alert(error);
       // console.log(error);
     }

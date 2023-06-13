@@ -6,7 +6,7 @@ import { useGlobalContext } from '../context';
 
 
 const CreateBattle = () => {
-  const { contract, battleName, setBattleName, gameData, setShowAlert } = useGlobalContext();
+  const { contract, battleName, setBattleName, gameData, setShowAlert, setErrorMessage } = useGlobalContext();
   const [waitBattle, setWaitBattle] = useState(false);
   const navigate = useNavigate();
 
@@ -33,26 +33,10 @@ const CreateBattle = () => {
       setWaitBattle(true);
     } catch (error) {
       setShowAlert({ status: true, type: 'failure', message: `${error}` });
-      console.log(error)
-      // setErrorMessage(error);
+      // console.log(error)
+      setErrorMessage(error);
     }
   };
-
-  // const handleBattleExit = async () => {
-  //   const battleName = gameData.activeBattle.name;
-
-  //   try {
-  //     console.log('exit', battleName)
-  //     await contract.quitBattle(battleName, { gasLimit: 50000 });
-
-  //     console.log('exit', battleName)
-  //     console.log(`You're quitting the ${battleName}`)
-  //     setShowAlert({ status: true, type: 'info', message: `You're quitting the ${battleName}` });
-  //   } catch (error) {
-  //     console.log(error)
-  //     // setErrorMessage(error);
-  //   }
-  // };
 
   const handleBattleName = async () => {
     if (battleName === '' || battleName.trim() === '') return null;
@@ -61,8 +45,8 @@ const CreateBattle = () => {
       console.log(battleName)
     } catch (error) {
       setShowAlert({ status: true, type: 'failure', message: `${error}` });
-      console.log(error)
-      // setErrorMessage(error);
+      // console.log(error)
+      setErrorMessage(error);
     }
   };
 
