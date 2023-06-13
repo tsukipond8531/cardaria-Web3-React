@@ -4,6 +4,7 @@ import Web3Modal from 'web3modal';
 import { useNavigate } from 'react-router-dom';
 import { ABI, ADDRESS } from '../contract';
 import { createEventListeners } from './createEventListeners';
+import { GetParams } from '../utils/onboard.js';
 
 const GlobalContext = createContext();
 
@@ -16,11 +17,37 @@ export const GlobalContextProvider = ({children}) => {
     const [gameData, setGameData] = useState({ players: [], pendingBattles: [], activeBattle: null });
     const [updateGameData, setUpdateGameData] = useState(0);
     const [battleGround, setBattleGround] = useState('bg-panight');
+    const [step, setStep] = useState(1);
 
     const player1Ref = useRef();
     const player2Ref = useRef();
 
     const navigate = useNavigate();
+
+    //* Set battleground to local storage
+    useEffect(() => {
+      const isBattleground = localStorage.getItem('battleground');
+
+      if (isBattleground) {
+        setBattleGround(isBattleground);
+      } else {
+        localStorage.setItem('battleground', battleGround);
+      }
+    }, []);
+
+    //* Reset web3 onboarding modal params
+    useEffect(() => {
+      const resetParams = async () => {
+        const currentStep = await GetParams();
+
+        setStep(currentStep.step);
+      };
+
+      resetParams();
+
+      window?.ethereum?.on('chainChanged', () => resetParams());
+      window?.ethereum?.on('accountsChanged', () => resetParams());
+    }, []);
 
     //* Set the wallet address to the state
     const updateCurrentWalletAddress = async () => {
@@ -58,7 +85,7 @@ export const GlobalContextProvider = ({children}) => {
 
     //* Activate event listeners for the smart contract
     useEffect(() => {
-      if (contract) {
+      if (step === -1 && contract) {
         createEventListeners({
           navigate,
           contract,
@@ -71,14 +98,13 @@ export const GlobalContextProvider = ({children}) => {
           // setUpdateGameData,
         });
       }
-    }, [contract]);
+    }, [contract, step]);
 
     //* Set the game data to the state
     useEffect(() => {
       const fetchGameData = async () => {
         const fetchedBattles = await contract.getAllBattles();
         const pendingBattles = fetchedBattles.filter((battle) => battle.battleStatus === 0);
-        // console.log(fetchedBattles)
         let activeBattle = null;
 
         fetchedBattles.forEach((battle) => {

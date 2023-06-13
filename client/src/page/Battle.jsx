@@ -4,7 +4,7 @@ import styles from '../styles';
 import { ActionButton, Alert, Card, GameInfo, PlayerInfo } from '../components';
 import { useGlobalContext } from '../context';
 import { attack, attackSound, defense, defenseSound, player01 as player01Icon, player02 as player02Icon } from '../assets';
-import { playAudio } from '../utils/animation.js';
+// import { playAudio } from '../utils/animation.js';
 
 const Battle = () => {
     const { contract, gameData, walletAddress, showAlert, setShowAlert, battleGround } = useGlobalContext();
@@ -15,8 +15,10 @@ const Battle = () => {
     const navigate = useNavigate();
     // console.log('p1',player1)
     // console.log('p1',player2)
-    console.log('p1',gameData.activeBattle.players[0])
-    console.log('p1',gameData.activeBattle.players[1])
+    // console.log('p1',gameData.activeBattle.players[0])
+    // console.log('p1',gameData.activeBattle.players[1])
+
+    // console.log('players',players)
 
     useEffect(() => {
         const getPlayerInfo = async () => {
@@ -46,7 +48,7 @@ const Battle = () => {
             setPlayer1({ ...player01, att: p1Att, def: p1Def, health: p1H, mana: p1M });
             setPlayer2({ ...player02, att: 'X', def: 'X', health: p2H, mana: p2M });
           } catch (error) {
-            console.log(error);
+            console.log("error", error);
             // setErrorMessage(error.message);
           }
         };
@@ -54,7 +56,7 @@ const Battle = () => {
         if (contract && gameData.activeBattle) getPlayerInfo();
       }, [contract, gameData, battleName]);
 
-      console.log({contract, gameData, battleName})
+      // console.log({contract, gameData, battleName})
 
   return (
     <div className={`${styles.flexBetween} ${styles.gameContainer} ${battleGround}`}>
@@ -66,7 +68,7 @@ const Battle = () => {
             <Card
                 card={player2}
                 title={player2?.playerName}
-                // cardRef={player2Ref}
+                // cardRef=''
                 playerTwo
             />
 
@@ -83,7 +85,7 @@ const Battle = () => {
             <Card
                 card={player1}
                 title={player1?.playerName}
-                // cardRef={player1Ref}
+                // cardRef=''
                 restStyles="mt-3"
             />
             {/* <Card/> */}

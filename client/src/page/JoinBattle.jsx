@@ -15,7 +15,7 @@ const JoinBattle = () => {
 
     const handleClick = async (battleName) => {
         setBattleName(battleName);
-        console.log("gameData", gameData)
+        // console.log("gameData", gameData)
         console.log(battleName)
         // console.log(contract)
     
