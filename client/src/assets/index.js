@@ -6,6 +6,20 @@ import panight from './background/panight.jpg';
 import heroImg from './background/hero-img.jpg';
 import hero2Img from './background/Hero2.png';
 
+//marvelCards
+import ant_man from './characters/AntMan.png';
+import black_phanter from './characters/BlackPhanter.png';
+import black_widow from './characters/BlackWidow.png';
+import captain_america from './characters/CaptainAmerica.png';
+import doctor_strange from './characters/DoctorStrange.png';
+import hulk from './characters/Hulk.png';
+import ikaris from './characters/ikaris.png';
+import iron_man from './characters/IronMan.png';
+import peter_quill from './characters/PeterQuill.png';
+import sangchi from './characters/Sangchi.png';
+import spiderman from './characters/SpiderMan.png';
+import thor from './characters/Thor.png';
+
 // cards
 import ace from './Ace.png';
 import bakezori from './Bakezori.png';
@@ -52,11 +66,28 @@ import AlertIcon from './AlertIcon.jsx';
 // players
 import player01 from './player01.png';
 import player02 from './player02.png';
+import player01icon from './player01icon.png';
+import player02icon from './player02icon.png';
 
 // sounds
 import attackSound from './sounds/attack.wav';
 import defenseSound from './sounds/defense.mp3';
 import explosion from './sounds/explosion.mp3';
+
+export const marvelCards = [
+  ant_man,
+  black_phanter, 
+  black_widow,
+  captain_america,
+  doctor_strange,
+  hulk,
+  ikaris, 
+  iron_man,
+  peter_quill,
+  sangchi, 
+  spiderman,
+  thor
+];
 
 export const allCards = [
   ace,
@@ -140,6 +171,8 @@ export {
 
   player01,
   player02,
+  player01icon,
+  player02icon,
 
   attackSound,
   defenseSound,
