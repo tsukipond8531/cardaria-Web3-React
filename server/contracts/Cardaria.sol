@@ -7,7 +7,7 @@ pragma solidity ^0.8.0;
 import "./helper/Helper.sol";
 // import "./GameToken.sol";
 import "./utils/player/PlayerUtils.sol";
-// import "./Battle.sol";
+import "./utils/battle/Battle.sol";
 
 contract Cardaria is ERC1155, Ownable, ERC1155Supply {
     string public baseURI; // baseURI where token metadata is stored
@@ -23,6 +23,7 @@ contract Cardaria is ERC1155, Ownable, ERC1155Supply {
     Helper.GameToken[] public gameTokens;
     Helper.Battle[] public battles;
 
+    // Player Function
     function isPlayer(address addr) public view returns (bool) {
         return PlayerUtils.isPlayer(this, addr);
     }
@@ -48,5 +49,29 @@ contract Cardaria is ERC1155, Ownable, ERC1155Supply {
         return PlayerUtils.getAllPlayerTokens(this);
     }
 
+    // Battle getter function
+    function isBattle(string memory _name) public view returns (bool) {
+        return Battle.isBattle(battles, battleInfo, _name);
+    }
+
+    function getBattle(string memory _name) public view returns (Helper.Battle memory) {
+        return Battle.getBattle(battles, battleInfo, _name);
+    }
+
+    function getAllBattles() public view returns (Helper.Battle[] memory) {
+        return Battle.getAllBattles(battles);
+    }
+
+    function updateBattle(string memory _name, Helper.Battle memory _newBattle) private {  
+        Battle.updateBattle(battles, battleInfo, _name, _newBattle);
+    }
+
+      // Events
+    event NewPlayer(address indexed owner, string name);
+    event NewBattle(string battleName, address indexed player1, address indexed player2);
+    event BattleEnded(string battleName, address indexed winner, address indexed loser);
+    event BattleMove(string indexed battleName, bool indexed isFirstMove);
+    event NewGameToken(address indexed owner, uint256 id, uint256 attackStrength, uint256 defenseStrength);
+    event RoundEnded(address[2] damagedPlayers);
     // Rest of the contract code...
 }
