@@ -7,7 +7,7 @@ import { attack, attackSound, defense, defenseSound, player01 as player01Icon, p
 import { playAudio } from '../utils/animation.js';
 
 const Battle = () => {
-    const { contract, gameData, walletAddress, showAlert, setShowAlert, battleGround, setErrorMessage } = useGlobalContext();
+    const { contract, gameData, walletAddress, showAlert, setShowAlert, battleGround, setErrorMessage, player1Ref, player2Ref } = useGlobalContext();
     const [player2, setPlayer2] = useState({});
     const [player1, setPlayer1] = useState({});
     const { battleName } = useParams();
@@ -62,7 +62,7 @@ const Battle = () => {
           });
         } catch (error) {
           console.log(error)
-          setErrorMessage(error.message);
+          setErrorMessage(error);
         }
       };
 
@@ -76,7 +76,7 @@ const Battle = () => {
             <Card
                 card={player2}
                 title={player2?.playerName}
-                // cardRef=''
+                cardRef={player1Ref}
                 playerTwo
             />
 
@@ -93,7 +93,7 @@ const Battle = () => {
             <Card
                 card={player1}
                 title={player1?.playerName}
-                // cardRef=''
+                cardRef={player2Ref}
                 restStyles="mt-3"
             />
             {/* <Card/> */}

@@ -93,10 +93,9 @@ export const GlobalContextProvider = ({children}) => {
           provider,
           walletAddress,
           setShowAlert,
-          setUpdateGameData
-          // player1Ref,
-          // player2Ref,
-          // setUpdateGameData,
+          setUpdateGameData,
+          player1Ref,
+          player2Ref,
         });
       }
     }, [contract, step]);
@@ -161,7 +160,9 @@ export const GlobalContextProvider = ({children}) => {
             battleGround,
             setBattleGround,
             errorMessage,
-            setErrorMessage
+            setErrorMessage,
+            player1Ref,
+            player2Ref,
           }}
         >
           {children}
